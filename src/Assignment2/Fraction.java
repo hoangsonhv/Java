@@ -4,110 +4,99 @@ import javax.xml.stream.FactoryConfigurationError;
 import java.util.Scanner;
 
 public class Fraction {
-    // thuoc tinh
-    protected int tu,mau;
+    private int tuSo;
+    private int mauSo;
 
-    // ham tao khong doi so
-    public Fraction(){
-        tu = 1;
-        mau = 2;
-    }
-    // Ham tao 2 doi so
-    public Fraction(int tu,int mau){
-        this.tu = tu;
-        this.mau = mau;
+    public Fraction() {
     }
 
-    // Setter va getter
-
-    public int getTu() {
-        return tu;
+    public int getTuSo() {
+        return tuSo;
     }
 
-    public void setTu(int tu) {
-        this.tu = tu;
+    public void setTuSo(int tuSo) {
+        this.tuSo = tuSo;
     }
 
-    public int getMau() {
-        return mau;
+    public int getMauSo() {
+        return mauSo;
     }
 
-    public void setMau(int mau) {
-        this.mau = mau;
+    public void setMauSo(int mauSo) {
+        this.mauSo = mauSo!=0?mauSo:1;
     }
 
-    // Các phương thức.
-
-    public static void main(String[] args) {
-        //Nhap phan so
-        Scanner in = new Scanner(System.in);
-        int tu,mau;
-        System.out.print("Nhap tu so: ");
-        tu = in.nextInt();
-
-        System.out.print("Nhap mau so: ");
-        mau = in.nextInt();
-
-        //In phan so
-        System.out.println("Phan so vua nhap la:" + tu + "/" + mau);
-        Fraction phanSo1=new Fraction(tu,mau);
+    public void inputFraction(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhap tu so:");
+        setTuSo(sc.nextInt());
+        System.out.println("Nhap mau so:");
+        setMauSo(sc.nextInt());
     }
 
-    //Rút gọn phân số
-    public int timUCLN(int a, int b) {
-        while (a != b) {
-            if (a > b) {
-                a = a - b;
-            } else {
-                b = b - a;
-            }
+    public void printFraction(){
+        System.out.println("Phan so: "+getTuSo()+"/"+getMauSo());
+    }
+
+    public void rutGon(){
+        // tim UCLN cua tu so va mau so
+        int ucln = timUCLN();
+        setTuSo(getTuSo()/ucln);
+        setMauSo(getMauSo()/ucln);
+    }
+
+    public int timUCLN(){
+        for (int i=Math.min(getTuSo(),getMauSo());i>0;i--){
+            if(getTuSo()%i==0&&getMauSo()%i==0) return i;
         }
-        return a;
+        return 1;
     }
 
-    public void rutGonPhanSo() {
-        int i = timUCLN(this.getTu(), this.getMau());
-        this.setTu(this.getTu() / i);
-        this.setMau(this.getMau() / i);
+    public void nghichDao(){
+        int ms = getMauSo();
+        if(getTuSo()!=0){
+            setMauSo(getTuSo());
+            setTuSo(ms);
+        }else {
+            System.out.println("Khong the nghich dao");
+        }
     }
 
-    //Nghich dao phan so
-    public void NghichDao() {
-        int tmp;
-        tmp = tu;
-        tu = mau;
-        mau = tmp;
+    public Fraction add(Fraction ps){
+        int ms = this.getMauSo() * ps.getMauSo();
+        int ts = this.getTuSo()*ps.getMauSo() + ps.getTuSo()*this.getMauSo();
+        Fraction tong = new Fraction();
+        tong.setTuSo(ts);
+        tong.setMauSo(ms);
+        tong.rutGon();
+        return tong;
     }
 
-    public void congPhanSo(Fraction ps) {
-        int ts = this.getTu() * ps.getMau() + ps.getTu() * this.getMau();
-        int ms = this.getMau() * ps.getMau();
-        Fraction phanSoTong = new Fraction(ts, ms);
-        phanSoTong.rutGonPhanSo();
-        System.out.println("Tổng hai phân số = " + phanSoTong.tu + "/" + phanSoTong.mau);
+    public Fraction sub(Fraction ps){
+        int ms = this.getMauSo()*ps.getMauSo();
+        int ts = this.getTuSo()*ps.getMauSo() - ps.getTuSo()*this.getMauSo();
+        Fraction hieu = new Fraction();
+        hieu.setTuSo(ts);
+        hieu.setMauSo(ms);
+        hieu.rutGon();
+        return hieu;
     }
 
-    public void truPhanSo(Fraction ps) {
-        int ts = this.getTu() * ps.getMau() - ps.getTu() * this.getMau();
-        int ms = this.getMau() * ps.getMau();
-        Fraction phanSoHieu = new Fraction(ts, ms);
-        phanSoHieu.rutGonPhanSo();
-        System.out.println("Hiệu hai phân số = " + phanSoHieu.tu + "/" + phanSoHieu.mau);
+    public Fraction mul(Fraction ps){
+        int ts = this.getTuSo()*ps.getTuSo();
+        int ms = this.getMauSo()*ps.getMauSo();
+        Fraction tich = new Fraction();
+        tich.setTuSo(ts);
+        tich.setMauSo(ms);
+        tich.rutGon();
+        return tich;
     }
 
-    public void nhanPhanSo(Fraction ps) {
-        int ts = this.getTu() * ps.getTu();
-        int ms = this.getMau() * ps.getMau();
-        Fraction phanSoTich = new Fraction(ts, ms);
-        phanSoTich.rutGonPhanSo();
-        System.out.println("Tích hai phân số = " + phanSoTich.tu + "/" + phanSoTich.mau);
-    }
-
-    public void chiaPhanSo(Fraction ps) {
-        int ts = this.getTu() * ps.getMau();
-        int ms = this.getMau() * ps.getTu();
-        Fraction phanSoThuong = new Fraction(ts, ms);
-        phanSoThuong.rutGonPhanSo();
-        System.out.println("Thương hai phân số = " + phanSoThuong.tu + "/" + phanSoThuong.mau);
+    public Fraction div(Fraction ps){
+        Fraction thuong = new Fraction();
+        thuong.setTuSo(this.getTuSo()*ps.getMauSo());
+        thuong.setMauSo(this.getMauSo()*ps.getTuSo());
+        thuong.rutGon();
+        return thuong;
     }
 }
