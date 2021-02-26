@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 public class Product {
     private int id;
-    ArrayList<String > productName;
+    private String productName;
     private int qty;
-    private float price;
+    private double price;
+
+    public Product() {
+    }
 
     public int getId() {
         return id;
@@ -14,6 +17,14 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getQty() {
@@ -24,22 +35,20 @@ public class Product {
         this.qty = qty;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public Product() {
-    }
-
-    public void kiemtra(){
+    public boolean checkQty(){
         if(qty>0){
-            System.out.println("Con hang trong kho.");
-        }else{
-            System.out.println("Het hang.");
+            System.out.println("Con Hang.");
+            return true;
         }
+        System.out.println("Het Hang.");
+        return false;
     }
 }
