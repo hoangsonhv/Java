@@ -52,5 +52,8 @@ public class LopHoc {
         System.out.println("Ten lop: "+getTenlop());
         System.out.println("Phong hoc: "+getPhonghoc());
         System.out.println();
+        for (SinhVien s :getListSV()){
+            System.out.println("Ma So: "+s.getMaso()+"\n"+"Ho Ten: "+s.getHoten()+"\n"+"SDT: "+s.getSdt()+"\n"+"Dia Chi: "+s.getDiachi()+"\n");
+        }
     }
 }
