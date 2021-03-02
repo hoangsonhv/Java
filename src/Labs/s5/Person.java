@@ -61,7 +61,6 @@ public class Person {
         setDate(p.nextLine());
         System.out.println("Dia Chi: ");
         setAddress(p.nextLine());
-        System.out.println();
     }
 
     public void printPerson(){
@@ -69,7 +68,6 @@ public class Person {
         System.out.println("Gioi Tinh: : "+getGender());
         System.out.println("Ngay Sinh: "+getDate());
         System.out.println("Dia Chi: "+getAddress());
-        System.out.println();
     }
 
 }
