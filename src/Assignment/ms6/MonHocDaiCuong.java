@@ -14,9 +14,6 @@ public class MonHocDaiCuong extends MonHoc {
     public void themLopHoc(String name, int soluonghocsinh) {
         for(LopHoc p:danhSachLopHoc){
             if(p.getName().equals(name)){
-                if(!p.getLopHoc().contains(soluonghocsinh)){
-                    p.addSoluonghocsinh(soluonghocsinh);
-                }
                 return;
             }
         }
@@ -47,10 +44,7 @@ public class MonHocDaiCuong extends MonHoc {
     @Override
     public void inDanhSach() {
         for(LopHoc p :danhSachLopHoc){
-            System.out.println(p.getName());
-            for(Integer s:p.getLopHoc()){
-                System.out.println(s);
-            }
+            System.out.println("Tên Lớp: "+p.getName()+"-"+"Số Học Sinh: "+p.getSoluonghocsinh());
         }
     }
 }
