@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class LopHoc{
     public String name;
     public int soluonghocsinh;
+    public ArrayList<String > danhSachHS;
 
-    public LopHoc(String name, Integer soluonghocsinh){
+    public LopHoc(String name, int soluonghocsinh){
         this.name = name;
         this.soluonghocsinh = soluonghocsinh;
+        danhSachHS = new ArrayList<>();
     }
 
     public String getName() {
@@ -25,5 +27,9 @@ public class LopHoc{
 
     public void setSoluonghocsinh(int soluonghocsinh) {
         this.soluonghocsinh = soluonghocsinh;
+    }
+
+    public void nhapHS(){
+        System.out.println("Nhap Danh Sach Hoc Sinh:");
     }
 }
