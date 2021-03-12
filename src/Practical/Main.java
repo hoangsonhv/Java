@@ -24,7 +24,9 @@ public class Main {
         for (int i = 0;i<hotel.size();i++){
             if (ownerName.equals(hotel.get(i).getOwnerName())){
                 System.out.println("Name Hotel: "+hotel.get(i).getName()+"\n"+"Location Hotel: "+hotel.get(i).getLocation()+"\n"+"Ownername Hotel: "+hotel.get(i).getOwnerName());
-            }
+            }else
+                System.out.println("No Hotel..");
+            break;
         }
     }
 }
